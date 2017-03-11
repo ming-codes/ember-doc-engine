@@ -1,6 +1,9 @@
 /* jshint node: true */
 'use strict';
 
-module.exports = {
-  name: 'ember-doc-engine'
-};
+var EngineAddon    = require('ember-engines/lib/engine-addon');
+
+module.exports = EngineAddon.extend({
+  name: 'ember-doc-engine',
+  lazyLoading: false
+});
