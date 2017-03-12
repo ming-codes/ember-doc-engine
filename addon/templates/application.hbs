@@ -1,0 +1,33 @@
+<div>
+  <nav id="navigation">
+    <ul>
+      <li id="navigation__modules">
+        Modules
+        <ul>
+          {{#each model.modules as |module|}}
+            <li>
+              {{#link-to "modules" module.name}}
+                {{module.name}}
+              {{/link-to}}
+            </li>
+          {{/each}}
+        </ul>
+      </li>
+      <li id="navigation__classes">
+        Classes
+        <ul>
+          {{#each model.classes as |class|}}
+            <li>
+              {{#link-to "classes" class.name}}
+                {{class.name}}
+              {{/link-to}}
+            </li>
+          {{/each}}
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  <main>
+    {{outlet}}
+  </main>
+</div>
