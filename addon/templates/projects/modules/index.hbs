@@ -6,13 +6,13 @@
 
 <section id="module__parent">
   Parent:
-  {{#link-to "modules" model.supermodule.name}}
+  {{!#link-to "project.modules" "ember" model.supermodule.name}}
     {{model.supermodule.name}}
-  {{/link-to}}
+  {{!/link-to}}
 </section>
 
 <section id="module__description">
-  {{model.description}}
+  {{remarkable model.description}}
 </section>
 
 <section id="module__submodules">
@@ -20,9 +20,9 @@
   <ul>
     {{#each model.submodules as |module|}}
       <li>
-        {{#link-to "modules" module.name}}
+        {{!#link-to "project.modules" "ember" module.name}}
           {{module.name}}
-        {{/link-to}}
+        {{!/link-to}}
       </li>
     {{/each}}
   </ul>
@@ -33,9 +33,9 @@
   <ul>
     {{#each model.allClasses as |class|}}
       <li>
-        {{#link-to "classes" class.name}}
+        {{!#link-to "project.modules.classes" "ember" "ember" class.name}}
           {{class.name}}
-        {{/link-to}}
+        {{!/link-to}}
       </li>
     {{/each}}
   </ul>

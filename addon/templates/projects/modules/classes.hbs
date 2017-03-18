@@ -1,0 +1,76 @@
+<header>
+  <h1>{{model.name}} class</h1>
+</header>
+<hr>
+<section>
+  {{model.access}}
+</section>
+<section>
+  {{#if model.extends.id}}
+    <div>
+      EXTENDS:
+      {{!#link-to "classes" model.extends.name}}
+        {{model.extends.name}}
+      {{!/link-to}}
+    </div>
+  {{/if}}
+
+  {{#each model.uses as |use|}}
+    <div>
+      USES:
+      {{!#link-to "classes" use.name}}
+        {{use.name}}
+      {{!/link-to}}
+    </div>
+  {{/each}}
+
+  <div>
+    DEFINED IN:
+    <a>{{model.file.name}}:{{model.line}}</a>
+  </div>
+
+  {{#if model.module.id}}
+    <div>
+      MODULE:
+      {{!#link-to "modules" model.module.name}}
+        {{model.module.name}}
+      {{!/link-to}}
+    </div>
+  {{/if}}
+</section>
+
+<section>
+  {{remarkable model.description}}
+</section>
+
+<section class="de-content__class-items">
+  <header class="de-content__class-items__tabs">
+    <nav>
+      <ul>
+        <li>
+          {{#link-to "projects.modules.classes.index" model.name}}
+            Index
+          {{/link-to}}
+        </li>
+        <li>
+          {{#link-to "projects.modules.classes.methods" model.name}}
+            Methods
+          {{/link-to}}
+        </li>
+        <li>
+          {{#link-to "projects.modules.classes.properties" model.name}}
+            Properties
+          {{/link-to}}
+        </li>
+        <li>
+          {{#link-to "projects.modules.classes.events" model.name}}
+            Events
+          {{/link-to}}
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main class="de-content__class-items__content">
+    {{outlet}}
+  </main>
+</section>
