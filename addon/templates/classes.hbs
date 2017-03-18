@@ -1,2 +1,68 @@
-CLASSES {{model.name}}
-{{outlet}}
+<header>
+  <h1 id="class__name">{{model.name}} class</h1>
+</header>
+<hr>
+<section id="class__access">
+  {{model.access}}
+</section>
+<section id="class__info">
+  {{#if model.extends.id}}
+    <div>
+      EXTENDS:
+      {{#link-to "classes" model.extends.name}}
+        {{model.extends.name}}
+      {{/link-to}}
+    </div>
+  {{/if}}
+
+  {{#each model.uses as |use|}}
+    <div>
+      USES:
+      {{#link-to "classes" use.name}}
+        {{use.name}}
+      {{/link-to}}
+    </div>
+  {{/each}}
+
+  <div>
+    DEFINED IN:
+    <a>{{model.file.name}}:{{model.line}}</a>
+  </div>
+
+  {{#if model.module.id}}
+    <div>
+      MODULE:
+      {{#link-to "modules" model.module.name}}
+        {{model.module.name}}
+      {{/link-to}}
+    </div>
+  {{/if}}
+</section>
+
+<section id="class__description">
+  {{render-template (htmlbars (remarkable model.description)) model}}
+</section>
+
+<section id="class__members">
+  <header id="header-2">
+    <nav>
+      <ul>
+        <li>
+          <a>Index</a>
+        </li>
+        <li>
+          <a>Methods</a>
+        </li>
+        <li>
+          <a>Properties</a>
+        </li>
+        <li>
+          <a>Events</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main id="content-2">
+    {{outlet}}
+  </main>
+</section>

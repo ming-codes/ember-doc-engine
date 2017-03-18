@@ -1,33 +1,39 @@
-<div>
-  <nav id="navigation">
-    <ul>
-      <li id="navigation__modules">
-        Modules
-        <ul>
-          {{#each model.modules as |module|}}
-            <li>
-              {{#link-to "modules" module.name}}
-                {{module.name}}
-              {{/link-to}}
-            </li>
-          {{/each}}
-        </ul>
-      </li>
-      <li id="navigation__classes">
-        Classes
-        <ul>
-          {{#each model.classes as |class|}}
-            <li>
-              {{#link-to "classes" class.name}}
-                {{class.name}}
-              {{/link-to}}
-            </li>
-          {{/each}}
-        </ul>
-      </li>
-    </ul>
-  </nav>
-  <main>
+<div id="doc-engine">
+  <header id="header-1">
+    <nav id="navigation">
+      <ul>
+        {{#if model.modules.length}}
+          <li id="navigation__modules">
+            <a>Modules</a>
+            <ul>
+              {{#each model.modules as |module|}}
+                <li>
+                  {{#link-to "modules" module.name}}
+                    {{module.name}}
+                  {{/link-to}}
+                </li>
+              {{/each}}
+            </ul>
+          </li>
+        {{/if}}
+        {{#if model.classes.length}}
+          <li id="navigation__classes">
+            <a>Classes</a>
+            <ul>
+              {{#each model.classes as |class|}}
+                <li>
+                  {{#link-to "classes" class.name}}
+                    {{class.name}}
+                  {{/link-to}}
+                </li>
+              {{/each}}
+            </ul>
+          </li>
+        {{/if}}
+      </ul>
+    </nav>
+  </header>
+  <main id="content-1">
     {{outlet}}
   </main>
 </div>

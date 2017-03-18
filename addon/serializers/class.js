@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Serializer.extend({
@@ -47,6 +48,8 @@ export default DS.Serializer.extend({
             }
           });
         }
+
+        object.description = typeof object.description === 'object' ? Ember.HTMLBars.template(object.description) : object.description;
 
         return {
           id: className,

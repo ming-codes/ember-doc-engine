@@ -1,2 +1,42 @@
-modules!!
-{{outlet}}
+<header>
+  <h1 id="module__name">{{model.name}} module</h1>
+</header>
+
+<hr>
+
+<section id="module__parent">
+  Parent:
+  {{#link-to "modules" model.supermodule.name}}
+    {{model.supermodule.name}}
+  {{/link-to}}
+</section>
+
+<section id="module__description">
+  {{model.description}}
+</section>
+
+<section id="module__submodules">
+  <h2>Submodules</h2>
+  <ul>
+    {{#each model.submodules as |module|}}
+      <li>
+        {{#link-to "modules" module.name}}
+          {{module.name}}
+        {{/link-to}}
+      </li>
+    {{/each}}
+  </ul>
+</section>
+
+<section id="module__classes">
+  <h2>Classes</h2>
+  <ul>
+    {{#each model.allClasses as |class|}}
+      <li>
+        {{#link-to "classes" class.name}}
+          {{class.name}}
+        {{/link-to}}
+      </li>
+    {{/each}}
+  </ul>
+</section>

@@ -5,6 +5,7 @@ var EngineAddon = require('ember-engines/lib/engine-addon');
 var stew = require('broccoli-stew');
 var funnel = require('broccoli-funnel');
 var merge = require('broccoli-merge-trees');
+var path = require('path');
 
 var yuidoc = {
   extract: require('./lib/broccoli/yuidoc-extract'),
@@ -18,13 +19,53 @@ module.exports = EngineAddon.extend({
 
   lazyLoading: false,
 
+  included: function(parent) {
+    this._super.apply(this, arguments);
+
+    this.import('vendor/ember-doc-engine/ember-template-compiler.js');
+    this.import('vendor/ember-doc-engine/remarkable.js');
+    this.import('vendor/ember-doc-engine/highlight.pack.js');
+    this.import('vendor/ember-doc-engine/styles/monokai.css');
+  },
+
+  treeForCompiler: function() {
+    return funnel(path.dirname(this.templateCompilerPath()), {
+      files: [ 'ember-template-compiler.js' ]
+    });
+  },
+
+  treeForRemarkable: function() {
+    return funnel(path.dirname(require.resolve('remarkable')), {
+      srcDir: 'dist'
+    });
+  },
+
+  treeForHighlight: function() {
+    return funnel(path.dirname(require.resolve('highlightjs')), {
+      include: [
+        'highlight.pack.*',
+        'styles/**'
+      ]
+    });
+  },
+
+  treeForVendor: function(tree) {
+    var merged = merge([
+      this.treeForCompiler(),
+      this.treeForRemarkable(),
+      this.treeForHighlight()
+    ]);
+
+    return funnel(merged, {
+      destDir: 'ember-doc-engine'
+    });
+  },
+
   treeForPublic: function(tree) {
     var funneled = funnel(this.parent.root, {
       include: [ 'addon/**', 'app/**' ]
     });
-    var extracted = yuidoc.extract(funneled, {
-      templateCompiler: require(this.templateCompilerPath())
-    });
+    var extracted = yuidoc.extract(funneled);
     var transformed = yuidoc.transform(extracted, {
       outputFile: this.parent.name(),
       projectMeta: {
