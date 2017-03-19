@@ -1,27 +1,11 @@
 # ember-doc-engine
 
-This README outlines the details of collaborating on this Ember addon.
+`ember-doc-engine` is a documentation tool targeted at Ember add-on developers.
+
+It uses YUIDoc to generate documentation JSON files and consumes it as an Ember engine.
+As such, `ember-doc-engine` is able to consume YUIDoc JSON files from other projects,
+and let you cross link between multiple projects.
 
 ## Installation
 
-* `git clone <repository-url>` this repository
-* `cd ember-doc-engine`
-* `npm install`
-* `bower install`
-
-## Running
-
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-
-## Running Tests
-
-* `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
-
-## Building
-
-* `ember build`
-
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
+`ember install ember-doc-engine`

@@ -1,17 +1,17 @@
 {
   "name": "ember-doc-engine",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "A documentation tool targeted at Ember add-on developers.",
   "keywords": [
     "ember-addon"
   ],
   "license": "MIT",
-  "author": "",
+  "author": "Ming Liu",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": "https://github.com/ming-codes/ember-doc-engine",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
