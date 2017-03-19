@@ -1,0 +1,38 @@
+<h2>Methods</h2>
+<ul class="de-content__class-items__index-list">
+  {{#each model.methods as |method|}}
+    <li>
+      <a>{{method.name}}</a>
+    </li>
+  {{else}}
+    <li>
+      This class has no methods.
+    </li>
+  {{/each}}
+</ul>
+
+<h2>Properties</h2>
+<ul class="de-content__class-items__index-list">
+  {{#each model.properties as |property|}}
+    <li>
+      <a>{{property.name}}</a>
+    </li>
+  {{else}}
+    <li>
+      This class has no properties.
+    </li>
+  {{/each}}
+</ul>
+
+<h2>Events</h2>
+<ul class="de-content__class-items__index-list">
+  {{#each model.events as |event|}}
+    <li>
+      <a>{{event.name}}</a>
+    </li>
+  {{else}}
+    <li>
+      This class has no events.
+    </li>
+  {{/each}}
+</ul>

@@ -1,1 +1,34 @@
-{{outlet}}
+{{#each model.properties as |property index|}}
+  {{#if index}}
+    <hr>
+  {{/if}}
+
+  <div class="de-content__class-items__property">
+    <div class="de-content__class-items__property__signature">
+      <h3>{{property.name}}</h3>
+      <span class="de-content__class-items__type">
+        {{property.type}}
+      </span>
+      <span class="de-content__class-items__property__access">
+        {{property.access}}
+      </span>
+    </div>
+
+    <div class="de-content__class-items__property__meta">
+      <div>Inherited from Ember.ViewMixin packages/ember-views/lib/mixins/view_support.js:110</div>
+
+      {{#if property.since}}
+        <div>Available since {{property.since}}.</div>
+      {{/if}}
+    </div>
+
+    <div class="de-content__class-items__property__description">
+      {{remarkable property.description}}
+    </div>
+
+    <div class="de-content__class-items__property__default">
+      <span class="de-content__class-items__property__default__label">Default:</span>
+      <span class="de-content__class-items__property__default__value">{{property.default}}</span>
+    </div>
+  </div>
+{{/each}}

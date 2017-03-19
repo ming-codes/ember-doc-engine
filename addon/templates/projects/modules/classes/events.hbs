@@ -1,1 +1,70 @@
-{{outlet}}
+{{#each model.events as |event index|}}
+  {{#if index}}
+    <hr>
+  {{/if}}
+
+  <div class="de-content__class-items__event">
+    <div class="de-content__class-items__event__signature">
+      <h3>{{event.name}}</h3>
+      <span class="de-content__class-items__event__parameter">
+        <ul class="de-content__class-items__event__parameter__list">
+          {{#each event.params as |param|}}
+            <li class="de-content__class-items__event__parameter__item">
+              {{param.name}}
+            </li>
+          {{/each}}
+        </ul>
+      </span>
+      <span class="de-content__class-items__event__return de-content__class-items__type">
+        {{event.return.type}}
+      </span>
+      <span class="de-content__class-items__event__access">
+        {{event.access}}
+      </span>
+    </div>
+
+    <div class="de-content__class-items__event__meta">
+      <div>Inherited from Ember.ViewMixin packages/ember-views/lib/mixins/view_support.js:110</div>
+
+      {{#if event.since}}
+        <div>Available since {{event.since}}.</div>
+      {{/if}}
+    </div>
+
+    <div class="de-content__class-items__event__description">
+      {{remarkable event.description}}
+    </div>
+
+    <div class="de-content__class-items__event__description">
+      <h3>Parameters:</h3>
+      <div class="de-content__class-items__event__description__parameter-list">
+        {{#each event.params as |param|}}
+          <div class="de-content__class-items__event__description__parameter-item">
+            <span class="de-content__class-items__event__description__parameter__name">
+              {{param.name}}
+            </span>
+            <span class="de-content__class-items__type">[{{param.type}}]</span>
+            <span class="de-content__class-items__event__description__parameter__description">
+              {{remarkable param.description}}
+            </span>
+          </div>
+        {{else}}
+          This event does not accept any arguments.
+        {{/each}}
+      </div>
+    </div>
+    <div class="de-content__class-items__event__description">
+      <h3>Returns:</h3>
+      <div class="de-content__class-items__event__description__return">
+        {{#if event.return}}
+          <span class="de-content__class-items__type">{{event.return.type}}</span>
+          <span class="de-content__class-items__event__description__return__description">
+            {{remarkable event.return.description}}
+          </span>
+        {{else}}
+          This event does not return anything.
+        {{/if}}
+      </div>
+    </div>
+  </div>
+{{/each}}

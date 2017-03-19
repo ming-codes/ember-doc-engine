@@ -1,1 +1,70 @@
-{{outlet}}
+{{#each model.methods as |method index|}}
+  {{#if index}}
+    <hr>
+  {{/if}}
+
+  <div class="de-content__class-items__method">
+    <div class="de-content__class-items__method__signature">
+      <h3>{{method.name}}</h3>
+      <span class="de-content__class-items__method__parameter">
+        <ul class="de-content__class-items__method__parameter__list">
+          {{#each method.params as |param|}}
+            <li class="de-content__class-items__method__parameter__item">
+              {{param.name}}
+            </li>
+          {{/each}}
+        </ul>
+      </span>
+      <span class="de-content__class-items__method__return de-content__class-items__type">
+        {{method.return.type}}
+      </span>
+      <span class="de-content__class-items__method__access">
+        {{method.access}}
+      </span>
+    </div>
+
+    <div class="de-content__class-items__method__meta">
+      <div>Inherited from Ember.ViewMixin packages/ember-views/lib/mixins/view_support.js:110</div>
+
+      {{#if method.since}}
+        <div>Available since {{method.since}}.</div>
+      {{/if}}
+    </div>
+
+    <div class="de-content__class-items__method__description">
+      {{remarkable method.description}}
+    </div>
+
+    <div class="de-content__class-items__method__description">
+      <h3>Parameters:</h3>
+      <div class="de-content__class-items__method__description__parameter-list">
+        {{#each method.params as |param|}}
+          <div class="de-content__class-items__method__description__parameter-item">
+            <span class="de-content__class-items__method__description__parameter__name">
+              {{param.name}}
+            </span>
+            <span class="de-content__class-items__type">[{{param.type}}]</span>
+            <span class="de-content__class-items__method__description__parameter__description">
+              {{remarkable param.description}}
+            </span>
+          </div>
+        {{else}}
+          This method does not accept any arguments.
+        {{/each}}
+      </div>
+    </div>
+    <div class="de-content__class-items__method__description">
+      <h3>Returns:</h3>
+      <div class="de-content__class-items__method__description__return">
+        {{#if method.return}}
+          <span class="de-content__class-items__type">{{method.return.type}}</span>
+          <span class="de-content__class-items__method__description__return__description">
+            {{remarkable method.return.description}}
+          </span>
+        {{else}}
+          This method does not return anything.
+        {{/if}}
+      </div>
+    </div>
+  </div>
+{{/each}}
