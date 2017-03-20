@@ -1,42 +1,46 @@
 <header>
-  <h1 id="module__name">{{model.name}} module</h1>
+  <h1>{{model.name}} module</h1>
 </header>
 
 <hr>
 
-<section id="module__parent">
+<section class="de-content__module__parent">
   Parent:
-  {{!#link-to "project.modules" "ember" model.supermodule.name}}
+  {{#link-to "projects.modules" model.supermodule.name}}
     {{model.supermodule.name}}
-  {{!/link-to}}
+  {{/link-to}}
 </section>
 
-<section id="module__description">
+<section class="de-content__module__description">
   {{remarkable model.description}}
 </section>
 
-<section id="module__submodules">
+<section class="de-content__module__submodules">
   <h2>Submodules</h2>
   <ul>
     {{#each model.submodules as |module|}}
       <li>
-        {{!#link-to "project.modules" "ember" module.name}}
+        {{#link-to "projects.modules" module.name}}
           {{module.name}}
-        {{!/link-to}}
+        {{/link-to}}
       </li>
+    {{else}}
+      <li>This module has no submodules.</li>
     {{/each}}
   </ul>
 </section>
 
-<section id="module__classes">
+<section class="de-content__module__classes">
   <h2>Classes</h2>
   <ul>
     {{#each model.allClasses as |class|}}
       <li>
-        {{!#link-to "project.modules.classes" "ember" "ember" class.name}}
+        {{#link-to "projects.modules.classes" class.name}}
           {{class.name}}
-        {{!/link-to}}
+        {{/link-to}}
       </li>
+    {{else}}
+      <li>This module has no classes.</li>
     {{/each}}
   </ul>
 </section>

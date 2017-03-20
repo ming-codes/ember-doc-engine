@@ -1,45 +1,48 @@
 <header>
   <h1>{{model.name}} class</h1>
 </header>
+
 <hr>
-<section>
+
+<section class="de-content__class__access">
   {{model.access}}
 </section>
-<section>
+
+<section class="de-content__class__info">
   {{#if model.extends.id}}
     <div>
-      EXTENDS:
-      {{!#link-to "classes" model.extends.name}}
+      <span class="de-content__class__info__label">EXTENDS:</span>
+      {{#link-to "projects.modules.classes" model.extends.name}}
         {{model.extends.name}}
-      {{!/link-to}}
+      {{/link-to}}
     </div>
   {{/if}}
 
   {{#each model.uses as |use|}}
     <div>
-      USES:
-      {{!#link-to "classes" use.name}}
+      <span class="de-content__class__info__label">USES:</span>
+      {{#link-to "projects.modules.classes" use.name}}
         {{use.name}}
-      {{!/link-to}}
+      {{/link-to}}
     </div>
   {{/each}}
 
   <div>
-    DEFINED IN:
+    <span class="de-content__class__info__label">DEFINED IN:</span>
     <a>{{model.file.name}}:{{model.line}}</a>
   </div>
 
   {{#if model.module.id}}
     <div>
-      MODULE:
-      {{!#link-to "modules" model.module.name}}
+      <span class="de-content__class__info__label">MODULE:</span>
+      {{#link-to "projects.modules" model.module.name}}
         {{model.module.name}}
-      {{!/link-to}}
+      {{/link-to}}
     </div>
   {{/if}}
 </section>
 
-<section>
+<section class="de-content__class__description">
   {{remarkable model.description}}
 </section>
 

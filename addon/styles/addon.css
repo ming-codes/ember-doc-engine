@@ -78,6 +78,19 @@
   margin-bottom: .83em;
 }
 
+.de-content__module__parent,
+.de-content__class__info,
+.de-content__class__access {
+  margin: 1.5em 0;
+}
+
+.de-content__class__info__label {
+  color: #443331;
+  font-weight: bold;
+  margin: 0;
+  text-transform: uppercase;
+}
+
 .de-content__class-items {
   margin-top: 1em;
   border: 1px solid #e0e0e0;
