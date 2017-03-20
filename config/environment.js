@@ -7,5 +7,10 @@ module.exports = function(environment/* , appConfig */) {
     environment: environment
   };
 
+  ENV.DOCS = {
+    'ember': 'ember.json',
+    'ember-doc-engine': 'ember-doc-engine.json'
+  };
+
   return ENV;
 };

@@ -7,6 +7,8 @@ var funnel = require('broccoli-funnel');
 var merge = require('broccoli-merge-trees');
 var path = require('path');
 
+var file = require('broccoli-file-creator');
+
 var yuidoc = {
   extract: require('./lib/broccoli/yuidoc-extract'),
   transform: require('./lib/broccoli/yuidoc-transform')
@@ -61,6 +63,15 @@ module.exports = EngineAddon.extend({
     });
   },
 
+  treeForAddon: function() {
+    var tree = this._super.apply(this, arguments);
+    var docs = [ this.parentConfig().DOCS || {} ];
+
+    var config = 'export default ' + JSON.stringify(docs);
+
+    return merge([ tree, file('modules/ember-doc-engine/config/docs.js', config) ]);
+  },
+
   treeForPublic: function(tree) {
     var funneled = funnel(this.parent.root, {
       include: [ 'addon/**', 'app/**' ]
@@ -79,8 +90,12 @@ module.exports = EngineAddon.extend({
     return transformed;
   },
 
+  parentConfig: function() {
+    return require(path.join(this.parent.root, 'config/environment'))(process.env.EMBER_ENV);
+  },
+
   // borrowed from ember-cli-htmlbars http://git.io/vJDrW
-  projectConfig: function () {
+  projectConfig: function() {
     return this.project.config(process.env.EMBER_ENV);
   },
 

@@ -8,8 +8,8 @@
             <ul>
               {{#each projects as |project|}}
                 <li>
-                  {{#link-to "projects" project.name class="de-toc-2"}}
-                    {{project.name}}
+                  {{#link-to "projects" project.id class="de-toc-2"}}
+                    {{project.id}}
                   {{/link-to}}
                 </li>
               {{/each}}
@@ -23,7 +23,7 @@
             <ul>
               {{#each modules as |module|}}
                 <li>
-                  {{#link-to "projects.modules" module.name class="de-toc-2"}}
+                  {{#link-to "projects.modules" module.project.id module.name class="de-toc-2"}}
                     {{module.name}}
                   {{/link-to}}
                 </li>
@@ -57,7 +57,7 @@
             <ul>
               {{#each classes as |class|}}
                 <li>
-                  {{#link-to "projects.modules.classes" class.name class="de-toc-2"}}
+                  {{#link-to "projects.modules.classes" class.project.id class.module.name class.name class="de-toc-2"}}
                     {{class.name}}
                   {{/link-to}}
                 </li>

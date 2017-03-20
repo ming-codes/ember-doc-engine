@@ -21,7 +21,7 @@ export default DS.Serializer.extend({
             relationships: {
               project: {
                 data: {
-                  id: project.name,
+                  id: project.slug,
                   type: 'project'
                 }
               },
@@ -41,7 +41,7 @@ export default DS.Serializer.extend({
             relationships: {
               project: {
                 data: {
-                  id: project.name,
+                  id: project.slug,
                   type: 'project'
                 }
               },
@@ -66,7 +66,7 @@ export default DS.Serializer.extend({
           relationships: {
             project: {
               data: {
-                id: project.name,
+                id: project.slug,
                 type: 'project'
               }
             },
