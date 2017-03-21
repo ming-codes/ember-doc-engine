@@ -40,3 +40,11 @@ link to your documentation. They key is the slug you'll be using
 for the project and the value is the url to the YUIDoc json file.
 
 Don't forget to add your own project!
+
+Lastly, you'll need to mount the docs engine in your app.
+
+```
+Router.map(function() {
+  this.mount('ember-doc-engine', { resetNamespace: true, path: '/docs' });
+});
+```
