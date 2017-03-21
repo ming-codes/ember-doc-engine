@@ -2,6 +2,7 @@
   display: flex;
   background: #faf4f1;
   font-family: "Helvetica Neue", helvetica, arial, sans-serif;
+  padding: 40px;
 }
 
 .de-toc a,
@@ -20,6 +21,7 @@
 .de-toc ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .de-toc .de-toc-1,
@@ -56,8 +58,9 @@
 }
 
 .de-content {
-  margin: 12px 2.1em;
+  margin: 0 2.1em;
   flex: 1;
+  max-width: 700px;
 }
 
 .de-content h1 {
