@@ -1,6 +1,6 @@
 {
   "name": "ember-doc-engine",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A documentation tool targeted at Ember add-on developers.",
   "keywords": [
     "ember-addon"
