@@ -58,6 +58,9 @@
     "ember-source": "~2.12.0",
     "loader.js": "^4.2.3"
   },
+  "peerDependencies": {
+    "ember-engines": "0.4.0"
+  },
   "engines": {
     "node": ">= 0.12.0"
   },
