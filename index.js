@@ -73,16 +73,9 @@ module.exports = {
 
   treeFor: function(name) {
     if (name === 'addon') {
-      //    var tree = this._super.apply(this, arguments);
-      //    var docs = [ this.parentConfig().DOCS || {} ];
-      //
-      //    var config = 'export default ' + JSON.stringify(docs);
-      //
-      //    return merge([ tree, file('modules/ember-doc-engine/config/docs.js', config) ]);
+      var docs = [ this.parentConfig().DOCS || {} ];
       var config = `define('ember-doc-engine/config/docs', ['exports'], function(exports) {
-        exports['default'] = {
-          'ember': 'ember.json'
-        };
+        exports['default'] = ${JSON.stringify(docs)};
       });`
 
       return merge([
