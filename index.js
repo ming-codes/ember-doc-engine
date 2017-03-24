@@ -17,26 +17,7 @@ var yuidoc = {
 var DocEngine = EngineAddon.extend({
   name: 'ember-doc-engine',
 
-  lazyLoading: false,
-
-  treeForPublic: function(tree) {
-    var funneled = funnel(this.parent.root, {
-      include: [ 'addon/**', 'app/**' ]
-    });
-    var extracted = yuidoc.extract(funneled);
-    var transformed = yuidoc.transform(extracted, {
-      outputFile: this.parent.name(),
-      projectMeta: {
-        name: this.parent.pkg.name || '',
-        description: this.parent.pkg.description || '',
-        url: this.parent.pkg.url || '',
-        version: this.parent.pkg.version || ''
-      }
-    });
-
-    return transformed;
-  },
-
+  lazyLoading: false
 });
 
 module.exports = {
@@ -96,6 +77,27 @@ module.exports = {
         funnel(merged, {
           destDir: 'ember-doc-engine'
         })
+      ]);
+    }
+
+    if (name === 'public') {
+      var funneled = funnel(this.parent.root, {
+        include: [ 'addon/**', 'app/**' ]
+      });
+      var extracted = yuidoc.extract(funneled);
+      var transformed = yuidoc.transform(extracted, {
+        outputFile: this.parent.name(),
+        projectMeta: {
+          name: this.parent.pkg.name || '',
+          description: this.parent.pkg.description || '',
+          url: this.parent.pkg.url || '',
+          version: this.parent.pkg.version || ''
+        }
+      });
+
+      return merge([
+        DocEngine.treeFor.apply(this, arguments),
+        transformed
       ]);
     }
 
