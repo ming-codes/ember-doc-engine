@@ -14,12 +14,37 @@ var yuidoc = {
   transform: require('./lib/broccoli/yuidoc-transform')
 };
 
-// TODO
-// Scan parent addons for linkable projects
-module.exports = EngineAddon.extend({
+var DocEngine = EngineAddon.extend({
   name: 'ember-doc-engine',
 
   lazyLoading: false,
+
+  treeForPublic: function(tree) {
+    var funneled = funnel(this.parent.root, {
+      include: [ 'addon/**', 'app/**' ]
+    });
+    var extracted = yuidoc.extract(funneled);
+    var transformed = yuidoc.transform(extracted, {
+      outputFile: this.parent.name(),
+      projectMeta: {
+        name: this.parent.pkg.name || '',
+        description: this.parent.pkg.description || '',
+        url: this.parent.pkg.url || '',
+        version: this.parent.pkg.version || ''
+      }
+    });
+
+    return transformed;
+  },
+
+});
+
+module.exports = {
+  name: 'ember-doc-engine',
+
+  lazyLoading: false,
+
+  init: DocEngine.init,
 
   included: function(parent) {
     this._super.apply(this, arguments);
@@ -28,6 +53,60 @@ module.exports = EngineAddon.extend({
     this.import('vendor/ember-doc-engine/remarkable.js');
     this.import('vendor/ember-doc-engine/highlight.pack.js');
     this.import('vendor/ember-doc-engine/styles/monokai.css');
+  },
+
+  getEngineConfigContents: DocEngine.getEngineConfigContents,
+
+  cacheKeyForTree: DocEngine.cacheKeyForTree,
+
+  config: DocEngine.config,
+
+  engineConfig: DocEngine.engineConfig,
+
+  getAddonsConfig: DocEngine.getAddonsConfig,
+
+  contentFor: DocEngine.contentFor,
+
+  parentConfig: function() {
+    return require(path.join(this.parent.root, 'config/environment'))(process.env.EMBER_ENV);
+  },
+
+  treeFor: function(name) {
+    if (name === 'addon') {
+      //    var tree = this._super.apply(this, arguments);
+      //    var docs = [ this.parentConfig().DOCS || {} ];
+      //
+      //    var config = 'export default ' + JSON.stringify(docs);
+      //
+      //    return merge([ tree, file('modules/ember-doc-engine/config/docs.js', config) ]);
+      var config = `define('ember-doc-engine/config/docs', ['exports'], function(exports) {
+        exports['default'] = {
+          'ember': 'ember.json'
+        };
+      });`
+
+      return merge([
+        DocEngine.treeFor.apply(this, arguments),
+        file('modules/ember-doc-engine/config/docs.js', config)
+      ]);
+    }
+
+    if (name === 'vendor') {
+      var merged = merge([
+        this.treeForCompiler(),
+        this.treeForRemarkable(),
+        this.treeForHighlight()
+      ]);
+
+      return merge([
+        DocEngine.treeFor.apply(this, arguments),
+        funnel(merged, {
+          destDir: 'ember-doc-engine'
+        })
+      ]);
+    }
+
+    return DocEngine.treeFor.apply(this, arguments);
   },
 
   treeForCompiler: function() {
@@ -51,49 +130,6 @@ module.exports = EngineAddon.extend({
     });
   },
 
-  treeForVendor: function(tree) {
-    var merged = merge([
-      this.treeForCompiler(),
-      this.treeForRemarkable(),
-      this.treeForHighlight()
-    ]);
-
-    return funnel(merged, {
-      destDir: 'ember-doc-engine'
-    });
-  },
-
-  treeForAddon: function() {
-    var tree = this._super.apply(this, arguments);
-    var docs = [ this.parentConfig().DOCS || {} ];
-
-    var config = 'export default ' + JSON.stringify(docs);
-
-    return merge([ tree, file('modules/ember-doc-engine/config/docs.js', config) ]);
-  },
-
-  treeForPublic: function(tree) {
-    var funneled = funnel(this.parent.root, {
-      include: [ 'addon/**', 'app/**' ]
-    });
-    var extracted = yuidoc.extract(funneled);
-    var transformed = yuidoc.transform(extracted, {
-      outputFile: this.parent.name(),
-      projectMeta: {
-        name: this.parent.pkg.name || '',
-        description: this.parent.pkg.description || '',
-        url: this.parent.pkg.url || '',
-        version: this.parent.pkg.version || ''
-      }
-    });
-
-    return transformed;
-  },
-
-  parentConfig: function() {
-    return require(path.join(this.parent.root, 'config/environment'))(process.env.EMBER_ENV);
-  },
-
   // borrowed from ember-cli-htmlbars http://git.io/vJDrW
   projectConfig: function() {
     return this.project.config(process.env.EMBER_ENV);
@@ -113,4 +149,4 @@ module.exports = EngineAddon.extend({
 
     return path.resolve(this.project.root, templateCompilerPath);
   }
-});
+};
