@@ -2,7 +2,6 @@
 'use strict';
 
 var EngineAddon = require('ember-engines/lib/engine-addon');
-var stew = require('broccoli-stew');
 var funnel = require('broccoli-funnel');
 var merge = require('broccoli-merge-trees');
 var path = require('path');
