@@ -2,7 +2,9 @@
 <ul class="de-content__class-items__index-list">
   {{#each model.methods as |method|}}
     <li>
-      <a>{{method.name}}</a>
+      {{#link-to "projects.modules.classes.methods.anchor" method.name}}
+        {{method.name}}
+      {{/link-to}}
     </li>
   {{else}}
     <li>
@@ -15,7 +17,9 @@
 <ul class="de-content__class-items__index-list">
   {{#each model.properties as |property|}}
     <li>
-      <a>{{property.name}}</a>
+      {{#link-to "projects.modules.classes.properties.anchor" property.name}}
+        {{property.name}}
+      {{/link-to}}
     </li>
   {{else}}
     <li>
@@ -28,7 +32,9 @@
 <ul class="de-content__class-items__index-list">
   {{#each model.events as |event|}}
     <li>
-      <a>{{event.name}}</a>
+      {{#link-to "projects.modules.classes.events.anchor" event.name}}
+        {{event.name}}
+      {{/link-to}}
     </li>
   {{else}}
     <li>
