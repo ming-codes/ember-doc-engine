@@ -24,7 +24,15 @@
     </div>
 
     <div class="de-content__class-items__event__meta">
-      <div>Inherited from Ember.ViewMixin packages/ember-views/lib/mixins/view_support.js:110</div>
+      {{#unless (eq event.class.content model)}}
+        <div>
+          Inherited from
+          {{#link-to "projects.modules.classes" event.class.project.id event.class.module.name event.class.name}}
+            {{event.class.name}}
+          {{/link-to}}
+          <a>{{event.file.name}}:{{event.line}}</a>
+        </div>
+      {{/unless}}
 
       {{#if event.since}}
         <div>Available since {{event.since}}.</div>

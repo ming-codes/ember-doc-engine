@@ -15,7 +15,15 @@
     </div>
 
     <div class="de-content__class-items__property__meta">
-      <div>Inherited from Ember.ViewMixin packages/ember-views/lib/mixins/view_support.js:110</div>
+      {{#unless (eq property.class.content model)}}
+        <div>
+          Inherited from
+          {{#link-to "projects.modules.classes" property.class.project.id property.class.module.name property.class.name}}
+            {{property.class.name}}
+          {{/link-to}}
+          <a>{{property.file.name}}:{{property.line}}</a>
+        </div>
+      {{/unless}}
 
       {{#if property.since}}
         <div>Available since {{property.since}}.</div>
