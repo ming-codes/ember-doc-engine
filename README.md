@@ -10,6 +10,9 @@ It uses YUIDoc to generate documentation JSON files and consumes it as an Ember 
 As such, `ember-doc-engine` is able to consume YUIDoc JSON files from other projects,
 and let you cross link between multiple projects.
 
+Since `ember-engines` is still a work in progress. This addon will only support the
+latest version of `ember-engines` until it reaches 1.0.
+
 ## Installation
 
 `ember install ember-doc-engine`
