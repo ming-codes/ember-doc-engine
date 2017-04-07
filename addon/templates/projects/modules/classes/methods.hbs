@@ -24,7 +24,15 @@
     </div>
 
     <div class="de-content__class-items__method__meta">
-      <div>Inherited from Ember.ViewMixin packages/ember-views/lib/mixins/view_support.js:110</div>
+      {{#unless (eq method.class.content model)}}
+        <div>
+          Inherited from
+          {{#link-to "projects.modules.classes" method.class.project.id method.class.module.name method.class.name}}
+            {{method.class.name}}
+          {{/link-to}}
+          <a>{{method.file.name}}:{{method.line}}</a>
+        </div>
+      {{/unless}}
 
       {{#if method.since}}
         <div>Available since {{method.since}}.</div>
