@@ -26,6 +26,10 @@ module.exports = {
 
   init: DocEngine.init,
 
+  nonDuplicatedAddonInvoke: DocEngine.nonDuplicatedAddonInvoke,
+  nonDuplicatedAddons: DocEngine.nonDuplicatedAddons,
+  ancestorHostAddonNames: DocEngine.ancestorHostAddonNames,
+
   included: function(parent) {
     this._super.apply(this, arguments);
 
