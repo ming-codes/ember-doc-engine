@@ -13,6 +13,7 @@ export default DS.Model.extend({
   type: DS.attr('string'),
   since: DS.attr('string'),
   itemtype: DS.attr('string'),
+  deprecated: DS.attr('boolean'),
   access: DS.attr('string'),
   tagname: DS.attr('string'),
   params: DS.attr('array'),

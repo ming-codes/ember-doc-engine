@@ -17,6 +17,7 @@ export default DS.Serializer.extend({
             default: item.default,
             type: item.type,
             itemtype: item.itemtype,
+            deprecated: item.deprecated,
             access: item.access,
             tagname: item.tagname,
             params: item.params,
