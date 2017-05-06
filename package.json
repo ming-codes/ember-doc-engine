@@ -59,7 +59,7 @@
     "loader.js": "^4.2.3"
   },
   "peerDependencies": {
-    "ember-engines": "0.5.2"
+    "ember-engines": "0.5.3"
   },
   "engines": {
     "node": ">= 0.12.0"
