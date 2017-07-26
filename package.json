@@ -56,7 +56,7 @@
     "ember-load-initializers": "^1.0.0",
     "ember-resolver": "^4.1.0",
     "ember-source": "~2.13.0",
-    "loader.js": "^4.4.0"
+    "loader.js": "^4.6.0"
   },
   "peerDependencies": {
     "ember-engines": "0.5.2"
