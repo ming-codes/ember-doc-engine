@@ -4,6 +4,8 @@
 [![Build Status](https://travis-ci.org/ming-codes/ember-doc-engine.svg?branch=master)](https://travis-ci.org/ming-codes/ember-doc-engine)
 [![Greenkeeper badge](https://badges.greenkeeper.io/ming-codes/ember-doc-engine.svg)](https://greenkeeper.io/)
 
+> **This addon is deprecated. Please use [`ember-cli-addon-docs`](https://ember-learn.github.io/ember-cli-addon-docs/) instead**
+
 `ember-doc-engine` is a documentation tool targeted at Ember add-on developers.
 
 It uses YUIDoc to generate documentation JSON files and consumes it as an Ember engine.
